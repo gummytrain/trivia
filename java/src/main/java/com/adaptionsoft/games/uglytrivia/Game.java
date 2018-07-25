@@ -16,9 +16,12 @@ public class Game {
     
     int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
-    
-    public  Game(){
-    	for (int i = 0; i < 50; i++) {
+	private final QuestionDeck questionDeck;
+
+	public  Game(){
+		questionDeck = new QuestionDeck();
+		
+		for (int i = 0; i < 50; i++) {
 			popQuestions.addLast("Pop Question " + i);
 			scienceQuestions.addLast(("Science Question " + i));
 			sportsQuestions.addLast(("Sports Question " + i));
