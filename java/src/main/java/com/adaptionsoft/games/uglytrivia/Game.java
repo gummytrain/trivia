@@ -82,27 +82,25 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		if (currentCategory() == "Pop")
-			System.out.println(popQuestions.removeFirst());
-		if (currentCategory() == "Science")
-			System.out.println(scienceQuestions.removeFirst());
-		if (currentCategory() == "Sports")
-			System.out.println(sportsQuestions.removeFirst());
-		if (currentCategory() == "Rock")
-			System.out.println(rockQuestions.removeFirst());		
+		questionDeck.askQuestionFor(currentCategory(), this);
 	}
-	
-	
+
+
 	private String currentCategory() {
-		if (places[currentPlayer] == 0) return "Pop";
-		if (places[currentPlayer] == 4) return "Pop";
-		if (places[currentPlayer] == 8) return "Pop";
-		if (places[currentPlayer] == 1) return "Science";
-		if (places[currentPlayer] == 5) return "Science";
-		if (places[currentPlayer] == 9) return "Science";
-		if (places[currentPlayer] == 2) return "Sports";
-		if (places[currentPlayer] == 6) return "Sports";
-		if (places[currentPlayer] == 10) return "Sports";
+		int playerPosition = places[currentPlayer];
+		return currentCategoryFor(playerPosition);
+	}
+
+	private String currentCategoryFor(int playerPosition) {
+		if (playerPosition == 0) return "Pop";
+		if (playerPosition == 4) return "Pop";
+		if (playerPosition == 8) return "Pop";
+		if (playerPosition == 1) return "Science";
+		if (playerPosition == 5) return "Science";
+		if (playerPosition == 9) return "Science";
+		if (playerPosition == 2) return "Sports";
+		if (playerPosition == 6) return "Sports";
+		if (playerPosition == 10) return "Sports";
 		return "Rock";
 	}
 
