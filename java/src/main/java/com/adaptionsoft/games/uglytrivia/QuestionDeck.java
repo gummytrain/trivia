@@ -24,4 +24,17 @@ public class QuestionDeck {
         if (currentCategory == "Rock")
             System.out.println(game.rockQuestions.removeFirst());
     }
+
+    String currentCategoryFor(int playerPosition) {
+        if (playerPosition == 0) return "Pop";
+        if (playerPosition == 4) return "Pop";
+        if (playerPosition == 8) return "Pop";
+        if (playerPosition == 1) return "Science";
+        if (playerPosition == 5) return "Science";
+        if (playerPosition == 9) return "Science";
+        if (playerPosition == 2) return "Sports";
+        if (playerPosition == 6) return "Sports";
+        if (playerPosition == 10) return "Sports";
+        return "Rock";
+    }
 }
