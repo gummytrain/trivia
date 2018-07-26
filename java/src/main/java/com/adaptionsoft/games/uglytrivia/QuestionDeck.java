@@ -15,7 +15,7 @@ public class QuestionDeck {
     List<Integer> sportsPlaces = asList(2, 6, 10);
     LinkedList<String> rockQuestions = new LinkedList();
     List<Integer> rockPlaces = asList(3, 7, 11);
-    Category pop = new Category("wfiewin", Collections.emptyList()  );
+    Category pop = new Category("Pop", popPlaces);
 
     public String createQuestion(int index, final String category) {
         return category + " Question " + index;
@@ -23,8 +23,7 @@ public class QuestionDeck {
 
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.pop.addQuestion(createQuestion(i, "Pop"));
-            this.popQuestions.addLast(createQuestion(i, "Pop"));
+            this.pop.addQuestion(createQuestion(i, pop.name()));
             this.scienceQuestions.addLast(createQuestion(i, "Science"));
             this.sportsQuestions.addLast(createQuestion(i, "Sports"));
             this.rockQuestions.addLast(createQuestion(i, "Rock"));
@@ -34,11 +33,6 @@ public class QuestionDeck {
     String askQuestionFor(String currentCategory) {
         if(pop.isNamed(currentCategory)) {
             String question = pop.nextQuestion();
-            System.out.println(question);
-            return question;
-        }
-        if (currentCategory.equals("Pop")) {
-            String question = this.popQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
@@ -62,7 +56,6 @@ public class QuestionDeck {
 
     String currentCategoryFor(int playerPosition) {
         if (pop.isPlacedOn(playerPosition)) return pop.name();
-        if (popPlaces.contains(playerPosition)) return "Pop";
         if (sciencePlaces.contains(playerPosition)) return "Science";
         if (sportsPlaces.contains(playerPosition)) return "Sports";
         if (rockPlaces.contains(playerPosition)) return "Rock";

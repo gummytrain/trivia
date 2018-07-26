@@ -33,7 +33,7 @@ class CategoryShould {
 
         assertFalse(category.isPlacedOn(90));
     }
-    
+
     @Test
     void hostSingleQuestion() {
         Category history = new Category("history", emptyList());
