@@ -1,8 +1,8 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.LinkedList;
 import java.util.List;
 
+import static java.lang.String.*;
 import static java.util.Arrays.asList;
 
 public class QuestionDeck {
@@ -16,16 +16,11 @@ public class QuestionDeck {
         categories = asList(pop, science, sports, rock);
     }
 
-    public String createQuestion(int index, final String category) {
-        return category + " Question " + index;
-    }
-
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.pop.addQuestion(createQuestion(i, pop.name()));
-            this.science.addQuestion(createQuestion(i, science.name()));
-            this.sports.addQuestion(createQuestion(i, sports.name()));
-            this.rock.addQuestion(createQuestion(i, rock.name()));
+            for (Category category : categories) {
+                category.addQuestion(format("%s Question %d", category.name(), i));
+            }
         }
     }
 
@@ -47,11 +42,6 @@ public class QuestionDeck {
             if (category.isPlacedOn(playerPosition))
                 return category.name();
         }
-
-        if (pop.isPlacedOn(playerPosition)) return pop.name();
-        if (science.isPlacedOn(playerPosition)) return science.name();
-        if (sports.isPlacedOn(playerPosition)) return sports.name();
-        if (rock.isPlacedOn(playerPosition)) return rock.name();
         throw new OutOfTheBoardException();
     }
 }
