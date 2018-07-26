@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static java.lang.String.*;
 import static java.util.Arrays.asList;
@@ -17,11 +18,10 @@ public class QuestionDeck {
     }
 
     public void fillQuestions() {
-        for (int i = 0; i < 50; i++) {
-            for (Category category : categories) {
-                category.addQuestion(format("%s Question %d", category.name(), i));
-            }
-        }
+        IntStream.range(0, 50).forEach(
+                i -> categories.
+                        forEach(category -> category.addQuestion(format("%s Question %d", category.name(), i)))
+        );
     }
 
     String nextQuestionFor(String currentCategory) {
