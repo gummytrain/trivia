@@ -35,18 +35,7 @@ class QuestionDeckTest {
 
         assertThat(actualCategory, is("Rock"));
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
-    void askingFirstQuestion(String category) {
-
-        QuestionDeck questionDeck = new QuestionDeck();
-
-        questionDeck.fillQuestions();
-
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
-    }
-
+    
     @ParameterizedTest
     @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
     void askMultipleQuestion(String category) {
