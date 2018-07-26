@@ -32,9 +32,7 @@ class QuestionDeckTest {
     void out_of_the_board(int playerPosition) {
         QuestionDeck questionDeck = new QuestionDeck();
 
-        String actualCategory = questionDeck.currentCategoryFor(playerPosition);
-
-        assertThat(actualCategory, is("Rock"));
+        assertThrows(OutOfTheBoardException.class, () -> questionDeck.currentCategoryFor(playerPosition));
     }
     
     @ParameterizedTest
@@ -57,9 +55,6 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThrows(QuestionForUnknownCategory.class, () -> {
-            String question = questionDeck.nextQuestionFor("unknown");
-            System.out.println(question);
-        });
+        assertThrows(QuestionForUnknownCategory.class, () -> questionDeck.nextQuestionFor("unknown"));
     }
 }

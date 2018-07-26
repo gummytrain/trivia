@@ -48,6 +48,6 @@ public class QuestionDeck {
         if (science.isPlacedOn(playerPosition)) return science.name();
         if (sports.isPlacedOn(playerPosition)) return sports.name();
         if (rock.isPlacedOn(playerPosition)) return rock.name();
-        return "Rock";
+        throw new OutOfTheBoardException();
     }
 }
