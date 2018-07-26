@@ -21,7 +21,7 @@ public class CategoryQuestions {
     }
 
     public String name() {
-        return null;
+        return name;
     }
 
     public void addQuestion(String question) {
