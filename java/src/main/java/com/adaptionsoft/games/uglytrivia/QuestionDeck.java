@@ -22,22 +22,22 @@ public class QuestionDeck {
     }
 
     String askQuestionFor(String currentCategory) {
-        if (currentCategory == "Pop") {
+        if (currentCategory.equals("Pop")) {
             String question = this.popQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Science") {
+        if (currentCategory.equals("Science")) {
             String question = this.scienceQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Sports") {
+        if (currentCategory.equals("Sports")) {
             String question = this.sportsQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Rock") {
+        if (currentCategory.equals("Rock")) {
             String question = this.rockQuestions.removeFirst();
             System.out.println(question);
             return question;
