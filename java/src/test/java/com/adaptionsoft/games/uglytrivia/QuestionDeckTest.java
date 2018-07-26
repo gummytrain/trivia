@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 class QuestionDeckTest {
 
@@ -42,6 +43,15 @@ class QuestionDeckTest {
         questionDeck.fillQuestions();
 
         assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
+    }
+
+    @Test
+    void askingForUnknownCategory() {
+        QuestionDeck questionDeck = new QuestionDeck();
+
+        questionDeck.fillQuestions();
+
+        assertThat(questionDeck.askQuestionFor("unknown"), is(nullValue()));
     }
 
     @Test
