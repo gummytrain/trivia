@@ -1,6 +1,8 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 import static java.lang.String.*;
@@ -25,18 +27,20 @@ public class QuestionDeck {
     }
 
     String nextQuestionFor(String currentCategory) {
-        return categories.stream()
-                .filter(category -> category.isNamed(currentCategory))
-                .findFirst()
+        return findCategory(category -> category.isNamed(currentCategory))
                 .orElseThrow(QuestionForUnknownCategory::new)
                 .nextQuestion();
     }
 
     String currentCategoryFor(int playerPosition) {
-        return categories.stream()
-                .filter(category -> category.isPlacedOn(playerPosition))
-                .findFirst()
+        return findCategory(category -> category.isPlacedOn(playerPosition))
                 .orElseThrow(OutOfTheBoardException::new)
                 .name();
+    }
+
+    private Optional<Category> findCategory(Predicate<Category> predicate) {
+        return categories.stream()
+                .filter(predicate)
+                .findFirst();
     }
 }
