@@ -38,7 +38,7 @@ class QuestionDeckTest {
 
     @ParameterizedTest
     @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
-    void askingFirstPopQuestion(String category) {
+    void askingFirstQuestion(String category) {
 
         QuestionDeck questionDeck = new QuestionDeck();
 
@@ -47,17 +47,18 @@ class QuestionDeckTest {
         assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
     }
 
-    @Test
-    void askMultiplePopQuestion() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
+    void askMultipleQuestion(String category) {
         QuestionDeck questionDeck = new QuestionDeck();
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 1"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 2"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 3"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 4"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 1"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 2"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 3"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 4"));
     }
 
     @Test
