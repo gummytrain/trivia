@@ -2,14 +2,11 @@ package com.adaptionsoft.games.uglytrivia;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.Collections;
-
 import static java.util.Arrays.asList;
+import static java.util.Collections.emptyList;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class CategoryShould {
 
@@ -39,8 +36,17 @@ class CategoryShould {
 
 
     @Test
+    void hostQuestions() {
+        Category history = new Category("history", emptyList());
+
+        history.addQuestion("When was Gabriele born?");
+
+        assertThat(history.nextQuestion(), is("When was Gabriele born?"));
+    }
+
+    @Test
     void notProvideAQuestionWhenThereArent() {
-        Category history = new Category("history", Collections.emptyList());
+        Category history = new Category("banana", emptyList());
 
         assertThrows(NoMoreQuestion.class, history::nextQuestion);
     }
