@@ -1,11 +1,15 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.List;
+
 public class CategoryQuestions {
     private String name;
+    private List<Integer> positions;
 
-    public CategoryQuestions(String name) {
+    public CategoryQuestions(String name, List<Integer> positions) {
 
         this.name = name;
+        this.positions = positions;
     }
 
     public boolean isNamed(String categoryName) {
@@ -17,7 +21,7 @@ public class CategoryQuestions {
     }
 
     public boolean isPlacedOn(int position) {
-        return false;
+        return positions.contains(position);
     }
 
     public String name() {

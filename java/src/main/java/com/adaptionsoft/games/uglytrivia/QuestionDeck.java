@@ -1,5 +1,6 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -14,7 +15,7 @@ public class QuestionDeck {
     List<Integer> sportsPlaces = asList(2, 6, 10);
     LinkedList<String> rockQuestions = new LinkedList();
     List<Integer> rockPlaces = asList(3, 7, 11);
-    CategoryQuestions pop = new CategoryQuestions("Pop");
+    CategoryQuestions pop = new CategoryQuestions("wfiewin", Collections.emptyList());
 
     public String createQuestion(int index, final String category) {
         return category + " Question " + index;
