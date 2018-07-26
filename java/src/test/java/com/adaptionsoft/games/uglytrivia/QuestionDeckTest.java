@@ -26,7 +26,7 @@ class QuestionDeckTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"12"})
+    @ValueSource(strings = {"12", "99999", "-1", "" + Integer.MAX_VALUE})
     void out_of_the_board(int playerPosition) {
         QuestionDeck questionDeck = new QuestionDeck();
 
