@@ -8,11 +8,11 @@ import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-class CategoryQuestionsShould {
+class CategoryShould {
 
     @Test
     void isNamed() {
-        CategoryQuestions category = new CategoryQuestions("banana", null);
+        Category category = new Category("banana", null);
 
         assertTrue(category.isNamed("banana"));
         assertThat(category.name(), is("banana"));
@@ -20,7 +20,7 @@ class CategoryQuestionsShould {
 
     @Test
     void reportWhereItIsPlaced() {
-        CategoryQuestions category = new CategoryQuestions("banana", asList(0, 1, 2));
+        Category category = new Category("banana", asList(0, 1, 2));
 
         assertTrue(category.isPlacedOn(0));
         assertTrue(category.isPlacedOn(2));
@@ -29,7 +29,7 @@ class CategoryQuestionsShould {
 
     @Test
     void reportWhereIsNotPlaced() {
-        CategoryQuestions category = new CategoryQuestions("banana", asList(0, 1, 2));
+        Category category = new Category("banana", asList(0, 1, 2));
 
         assertFalse(category.isPlacedOn(90));
     }

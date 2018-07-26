@@ -2,11 +2,11 @@ package com.adaptionsoft.games.uglytrivia;
 
 import java.util.List;
 
-public class CategoryQuestions {
+public class Category {
     private String name;
     private List<Integer> positions;
 
-    public CategoryQuestions(String name, List<Integer> positions) {
+    public Category(String name, List<Integer> positions) {
 
         this.name = name;
         this.positions = positions;
