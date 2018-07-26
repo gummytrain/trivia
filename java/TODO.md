@@ -3,3 +3,4 @@
 [] Primitive obsession
 [] Divergent Change
 [] Switch statements
+[] Data clumps
