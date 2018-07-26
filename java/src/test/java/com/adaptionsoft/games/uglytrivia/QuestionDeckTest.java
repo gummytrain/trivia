@@ -3,6 +3,7 @@ package com.adaptionsoft.games.uglytrivia;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -24,11 +25,12 @@ class QuestionDeckTest {
         assertThat(actualCategory, is(expectedCategory));
     }
 
-    @Test
-    void out_of_the_board() {
+    @ParameterizedTest
+    @ValueSource(strings = {"12"})
+    void out_of_the_board(int playerPosition) {
         QuestionDeck questionDeck = new QuestionDeck();
 
-        String actualCategory = questionDeck.currentCategoryFor(12);
+        String actualCategory = questionDeck.currentCategoryFor(playerPosition);
 
         assertThat(actualCategory, is("Rock"));
     }
