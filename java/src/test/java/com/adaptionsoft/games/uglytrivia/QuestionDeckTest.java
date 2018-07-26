@@ -44,11 +44,11 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 1"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 2"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 3"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 4"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 0"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 1"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 2"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 3"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 4"));
     }
 
     @Test
@@ -57,6 +57,9 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThrows(QuestionForUnknownCategory.class, () -> questionDeck.askQuestionFor("unknown"));
+        assertThrows(QuestionForUnknownCategory.class, () -> {
+            String question = questionDeck.nextQuestionFor("unknown");
+            System.out.println(question);
+        });
     }
 }

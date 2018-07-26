@@ -23,7 +23,7 @@ public class QuestionDeck {
         }
     }
 
-    String askQuestionFor(String currentCategory) {
+    String nextQuestionFor(String currentCategory) {
         String question = null;
         if (pop.isNamed(currentCategory)) {
             question = pop.nextQuestion();
@@ -40,7 +40,6 @@ public class QuestionDeck {
         if (question == null) {
             throw new QuestionForUnknownCategory();
         }
-        System.out.println(question);
         return question;
     }
 

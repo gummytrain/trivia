@@ -76,7 +76,8 @@ public class Game {
 	}
 
 	private void askQuestion() {
-		questionDeck.askQuestionFor(currentCategory());
+		String question = questionDeck.nextQuestionFor(currentCategory());
+		System.out.println(question);
 	}
 
 
