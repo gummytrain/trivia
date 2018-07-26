@@ -1,8 +1,15 @@
 package com.adaptionsoft.games.uglytrivia;
 
 public class CategoryQuestions {
-    public boolean isNamed(String name) {
-        return false;
+    private String name;
+
+    public CategoryQuestions(String name) {
+
+        this.name = name;
+    }
+
+    public boolean isNamed(String categoryName) {
+        return this.name.equals(categoryName);
     }
 
     public String nextQuestion() {
