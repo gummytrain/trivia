@@ -43,6 +43,11 @@ public class QuestionDeck {
     }
 
     String currentCategoryFor(int playerPosition) {
+        for (Category category : categories) {
+            if (category.isPlacedOn(playerPosition))
+                return category.name();
+        }
+
         if (pop.isPlacedOn(playerPosition)) return pop.name();
         if (science.isPlacedOn(playerPosition)) return science.name();
         if (sports.isPlacedOn(playerPosition)) return sports.name();
