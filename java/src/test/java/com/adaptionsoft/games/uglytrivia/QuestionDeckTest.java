@@ -36,11 +36,24 @@ class QuestionDeckTest {
     }
 
     @Test
-    void askingPopQuestion() {
+    void askingFirstPopQuestion() {
         QuestionDeck questionDeck = new QuestionDeck();
 
         questionDeck.fillQuestions();
 
         assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
+    }
+
+    @Test
+    void askMultiplePopQuestion() {
+        QuestionDeck questionDeck = new QuestionDeck();
+
+        questionDeck.fillQuestions();
+
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 1"));
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 2"));
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 3"));
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 4"));
     }
 }
