@@ -34,4 +34,13 @@ class QuestionDeckTest {
 
         assertThat(actualCategory, is("Rock"));
     }
+
+    @Test
+    void askingPopQuestion() {
+        QuestionDeck questionDeck = new QuestionDeck();
+
+        questionDeck.fillQuestions();
+
+        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
+    }
 }
