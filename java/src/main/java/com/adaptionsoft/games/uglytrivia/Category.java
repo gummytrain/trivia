@@ -17,7 +17,7 @@ public class Category {
     }
 
     public String nextQuestion() {
-        return null;
+        throw new NoMoreQuestion();
     }
 
     public boolean isPlacedOn(int position) {

@@ -15,7 +15,7 @@ public class QuestionDeck {
     List<Integer> sportsPlaces = asList(2, 6, 10);
     LinkedList<String> rockQuestions = new LinkedList();
     List<Integer> rockPlaces = asList(3, 7, 11);
-    Category pop = new Category("wfiewin", Collections.emptyList());
+    Category pop = new Category("wfiewin", Collections.emptyList()  );
 
     public String createQuestion(int index, final String category) {
         return category + " Question " + index;
