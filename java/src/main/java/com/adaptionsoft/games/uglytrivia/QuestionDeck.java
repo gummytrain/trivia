@@ -1,6 +1,7 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.LinkedList;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
@@ -9,6 +10,11 @@ public class QuestionDeck {
     Category science = new Category("Science", asList(1, 5, 9));
     Category sports = new Category("Sports", asList(2, 6, 10));
     Category rock = new Category("Rock", asList(3, 7, 11));
+    private final List<Category> categories;
+
+    public QuestionDeck() {
+        categories = asList(pop, science, sports, rock);
+    }
 
     public String createQuestion(int index, final String category) {
         return category + " Question " + index;
@@ -25,17 +31,10 @@ public class QuestionDeck {
 
     String nextQuestionFor(String currentCategory) {
         String question = null;
-        if (pop.isNamed(currentCategory)) {
-            question = pop.nextQuestion();
-        }
-        if (science.isNamed(currentCategory)) {
-            question = science.nextQuestion();
-        }
-        if (sports.isNamed(currentCategory)) {
-            question = sports.nextQuestion();
-        }
-        if (rock.isNamed(currentCategory)) {
-            question = rock.nextQuestion();
+
+        for (Category category : categories) {
+            if (category.isNamed(currentCategory))
+                question = category.nextQuestion();
         }
         if (question == null) {
             throw new QuestionForUnknownCategory();
