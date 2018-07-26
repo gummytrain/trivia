@@ -8,16 +8,16 @@ public class QuestionDeck {
     LinkedList<String> sportsQuestions = new LinkedList();
     LinkedList<String> rockQuestions = new LinkedList();
 
-    public String createRockQuestion(int index){
-        return "Rock Question " + index;
+    public String createQuestion(int index, final String category){
+        return category + " Question " + index;
     }
 
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.popQuestions.addLast("Pop Question " + i);
-            this.scienceQuestions.addLast(("Science Question " + i));
-            this.sportsQuestions.addLast(("Sports Question " + i));
-            this.rockQuestions.addLast(createRockQuestion(i));
+            this.popQuestions.addLast(createQuestion(i, "Pop"));
+            this.scienceQuestions.addLast(createQuestion(i, "Science"));
+            this.sportsQuestions.addLast(createQuestion(i, "Sports"));
+            this.rockQuestions.addLast(createQuestion(i, "Rock"));
         }
     }
 
