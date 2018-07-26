@@ -33,15 +33,27 @@ class CategoryShould {
 
         assertFalse(category.isPlacedOn(90));
     }
-
-
+    
     @Test
-    void hostQuestions() {
+    void hostSingleQuestion() {
         Category history = new Category("history", emptyList());
 
         history.addQuestion("When was Gabriele born?");
 
         assertThat(history.nextQuestion(), is("When was Gabriele born?"));
+    }
+
+    @Test
+    void hostMultipleQuestions() {
+        Category history = new Category("history", emptyList());
+
+        history.addQuestion("Question 1");
+        history.addQuestion("Question 2");
+        history.addQuestion("Question 3");
+
+        assertThat(history.nextQuestion(), is("Question 1"));
+        assertThat(history.nextQuestion(), is("Question 2"));
+        assertThat(history.nextQuestion(), is("Question 3"));
     }
 
     @Test
