@@ -33,10 +33,10 @@ public class QuestionDeck {
     }
 
     String currentCategoryFor(int playerPosition) {
-        for (Category category : categories) {
-            if (category.isPlacedOn(playerPosition))
-                return category.name();
-        }
-        throw new OutOfTheBoardException();
+        return categories.stream()
+                .filter(category -> category.isPlacedOn(playerPosition))
+                .findFirst()
+                .orElseThrow(OutOfTheBoardException::new)
+                .name();
     }
 }
