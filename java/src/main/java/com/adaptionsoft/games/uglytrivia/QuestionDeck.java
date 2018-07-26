@@ -24,25 +24,24 @@ public class QuestionDeck {
     }
 
     String askQuestionFor(String currentCategory) {
-        if(pop.isNamed(currentCategory)) {
-            String question = pop.nextQuestion();
-            System.out.println(question);
-            return question;
+        String question = null;
+        if (pop.isNamed(currentCategory)) {
+            question = pop.nextQuestion();
         }
-        if(science.isNamed(currentCategory)) {
-            String question = science.nextQuestion();
-            System.out.println(question);
-            return question;
-        }if(sports.isNamed(currentCategory)) {
-            String question = sports.nextQuestion();
-            System.out.println(question);
-            return question;
-        }if(rock.isNamed(currentCategory)) {
-            String question = rock.nextQuestion();
-            System.out.println(question);
-            return question;
+        if (science.isNamed(currentCategory)) {
+            question = science.nextQuestion();
         }
-        return null;
+        if (sports.isNamed(currentCategory)) {
+            question = sports.nextQuestion();
+        }
+        if (rock.isNamed(currentCategory)) {
+            question = rock.nextQuestion();
+        }
+        if (question == null) {
+            throw new QuestionForUnknownCategory();
+        }
+        System.out.println(question);
+        return question;
     }
 
     String currentCategoryFor(int playerPosition) {

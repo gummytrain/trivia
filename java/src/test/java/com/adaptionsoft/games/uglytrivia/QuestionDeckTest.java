@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class QuestionDeckTest {
 
@@ -56,6 +57,6 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor("unknown"), is(nullValue()));
+        assertThrows(QuestionForUnknownCategory.class, () -> questionDeck.askQuestionFor("unknown"));
     }
 }
