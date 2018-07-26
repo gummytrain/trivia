@@ -6,14 +6,14 @@ import static java.lang.String.*;
 import static java.util.Arrays.asList;
 
 public class QuestionDeck {
-    Category pop = new Category("Pop", asList(0, 4, 8));
-    Category science = new Category("Science", asList(1, 5, 9));
-    Category sports = new Category("Sports", asList(2, 6, 10));
-    Category rock = new Category("Rock", asList(3, 7, 11));
     private final List<Category> categories;
 
     public QuestionDeck() {
-        categories = asList(pop, science, sports, rock);
+        categories = asList(
+                new Category("Pop", asList(0, 4, 8)),
+                new Category("Science", asList(1, 5, 9)),
+                new Category("Sports", asList(2, 6, 10)),
+                new Category("Rock", asList(3, 7, 11)));
     }
 
     public void fillQuestions() {
@@ -25,16 +25,11 @@ public class QuestionDeck {
     }
 
     String nextQuestionFor(String currentCategory) {
-        String question = null;
-
-        for (Category category : categories) {
-            if (category.isNamed(currentCategory))
-                question = category.nextQuestion();
-        }
-        if (question == null) {
-            throw new QuestionForUnknownCategory();
-        }
-        return question;
+        return categories.stream()
+                .filter(category -> category.isNamed(currentCategory))
+                .findFirst()
+                .orElseThrow(QuestionForUnknownCategory::new)
+                .nextQuestion();
     }
 
     String currentCategoryFor(int playerPosition) {
