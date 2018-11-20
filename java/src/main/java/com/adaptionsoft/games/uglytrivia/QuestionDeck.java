@@ -21,15 +21,28 @@ public class QuestionDeck {
         }
     }
 
-    void askQuestionFor(String currentCategory) {
-        if (currentCategory == "Pop")
-            System.out.println(this.popQuestions.removeFirst());
-        if (currentCategory == "Science")
-            System.out.println(this.scienceQuestions.removeFirst());
-        if (currentCategory == "Sports")
-            System.out.println(this.sportsQuestions.removeFirst());
-        if (currentCategory == "Rock")
-            System.out.println(this.rockQuestions.removeFirst());
+    Object askQuestionFor(String currentCategory) {
+        if (currentCategory == "Pop") {
+            Object question = this.popQuestions.removeFirst();
+            System.out.println(question);
+            return question;
+        }
+        if (currentCategory == "Science") {
+            Object question = this.scienceQuestions.removeFirst();
+            System.out.println(question);
+            return question;
+        }
+        if (currentCategory == "Sports") {
+            Object question = this.sportsQuestions.removeFirst();
+            System.out.println(question);
+            return question;
+        }
+        if (currentCategory == "Rock") {
+            Object question = this.rockQuestions.removeFirst();
+            System.out.println(question);
+            return question;
+        }
+        return null;
     }
 
     String currentCategoryFor(int playerPosition) {
