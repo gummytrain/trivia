@@ -1,21 +1,14 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.Collections;
 import java.util.LinkedList;
-import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public class QuestionDeck {
-    LinkedList<String> popQuestions = new LinkedList();
-    List<Integer> popPlaces = asList(0, 4, 8);
-    LinkedList<String> scienceQuestions = new LinkedList();
-    List<Integer> sciencePlaces = asList(1, 5, 9);
-    LinkedList<String> sportsQuestions = new LinkedList();
-    List<Integer> sportsPlaces = asList(2, 6, 10);
-    LinkedList<String> rockQuestions = new LinkedList();
-    List<Integer> rockPlaces = asList(3, 7, 11);
-    Category pop = new Category("wfiewin", Collections.emptyList()  );
+    Category pop = new Category("Pop", asList(0, 4, 8));
+    Category science = new Category("Science", asList(1, 5, 9));
+    Category sports = new Category("Sports", asList(2, 6, 10));
+    Category rock = new Category("Rock", asList(3, 7, 11));
 
     public String createQuestion(int index, final String category) {
         return category + " Question " + index;
@@ -23,49 +16,38 @@ public class QuestionDeck {
 
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.pop.addQuestion(createQuestion(i, "Pop"));
-            this.popQuestions.addLast(createQuestion(i, "Pop"));
-            this.scienceQuestions.addLast(createQuestion(i, "Science"));
-            this.sportsQuestions.addLast(createQuestion(i, "Sports"));
-            this.rockQuestions.addLast(createQuestion(i, "Rock"));
+            this.pop.addQuestion(createQuestion(i, pop.name()));
+            this.science.addQuestion(createQuestion(i, science.name()));
+            this.sports.addQuestion(createQuestion(i, sports.name()));
+            this.rock.addQuestion(createQuestion(i, rock.name()));
         }
     }
 
-    String askQuestionFor(String currentCategory) {
-        if(pop.isNamed(currentCategory)) {
-            String question = pop.nextQuestion();
-            System.out.println(question);
-            return question;
+    String nextQuestionFor(String currentCategory) {
+        String question = null;
+        if (pop.isNamed(currentCategory)) {
+            question = pop.nextQuestion();
         }
-        if (currentCategory.equals("Pop")) {
-            String question = this.popQuestions.removeFirst();
-            System.out.println(question);
-            return question;
+        if (science.isNamed(currentCategory)) {
+            question = science.nextQuestion();
         }
-        if (currentCategory.equals("Science")) {
-            String question = this.scienceQuestions.removeFirst();
-            System.out.println(question);
-            return question;
+        if (sports.isNamed(currentCategory)) {
+            question = sports.nextQuestion();
         }
-        if (currentCategory.equals("Sports")) {
-            String question = this.sportsQuestions.removeFirst();
-            System.out.println(question);
-            return question;
+        if (rock.isNamed(currentCategory)) {
+            question = rock.nextQuestion();
         }
-        if (currentCategory.equals("Rock")) {
-            String question = this.rockQuestions.removeFirst();
-            System.out.println(question);
-            return question;
+        if (question == null) {
+            throw new QuestionForUnknownCategory();
         }
-        return null;
+        return question;
     }
 
     String currentCategoryFor(int playerPosition) {
         if (pop.isPlacedOn(playerPosition)) return pop.name();
-        if (popPlaces.contains(playerPosition)) return "Pop";
-        if (sciencePlaces.contains(playerPosition)) return "Science";
-        if (sportsPlaces.contains(playerPosition)) return "Sports";
-        if (rockPlaces.contains(playerPosition)) return "Rock";
-        return "Rock";
+        if (science.isPlacedOn(playerPosition)) return science.name();
+        if (sports.isPlacedOn(playerPosition)) return sports.name();
+        if (rock.isPlacedOn(playerPosition)) return rock.name();
+        throw new OutOfTheBoardException();
     }
 }

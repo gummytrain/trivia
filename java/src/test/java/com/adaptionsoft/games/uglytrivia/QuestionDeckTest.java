@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class QuestionDeckTest {
 
@@ -31,9 +32,7 @@ class QuestionDeckTest {
     void out_of_the_board(int playerPosition) {
         QuestionDeck questionDeck = new QuestionDeck();
 
-        String actualCategory = questionDeck.currentCategoryFor(playerPosition);
-
-        assertThat(actualCategory, is("Rock"));
+        assertThrows(OutOfTheBoardException.class, () -> questionDeck.currentCategoryFor(playerPosition));
     }
     
     @ParameterizedTest
@@ -43,11 +42,11 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 1"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 2"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 3"));
-        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 4"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 0"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 1"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 2"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 3"));
+        assertThat(questionDeck.nextQuestionFor(category), is(category + " Question 4"));
     }
 
     @Test
@@ -56,6 +55,6 @@ class QuestionDeckTest {
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor("unknown"), is(nullValue()));
+        assertThrows(QuestionForUnknownCategory.class, () -> questionDeck.nextQuestionFor("unknown"));
     }
 }
