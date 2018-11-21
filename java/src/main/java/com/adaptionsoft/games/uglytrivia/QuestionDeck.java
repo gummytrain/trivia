@@ -3,10 +3,10 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.LinkedList;
 
 public class QuestionDeck {
-    LinkedList popQuestions = new LinkedList();
-    LinkedList scienceQuestions = new LinkedList();
-    LinkedList sportsQuestions = new LinkedList();
-    LinkedList rockQuestions = new LinkedList();
+    LinkedList<String> popQuestions = new LinkedList();
+    LinkedList<String> scienceQuestions = new LinkedList();
+    LinkedList<String> sportsQuestions = new LinkedList();
+    LinkedList<String> rockQuestions = new LinkedList();
 
     public String createRockQuestion(int index){
         return "Rock Question " + index;
@@ -21,24 +21,24 @@ public class QuestionDeck {
         }
     }
 
-    Object askQuestionFor(String currentCategory) {
-        if (currentCategory == "Pop") {
-            Object question = this.popQuestions.removeFirst();
+    String askQuestionFor(String currentCategory) {
+        if (currentCategory.equals("Pop")) {
+            String question = this.popQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Science") {
-            Object question = this.scienceQuestions.removeFirst();
+        if (currentCategory.equals("Science")) {
+            String question = this.scienceQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Sports") {
-            Object question = this.sportsQuestions.removeFirst();
+        if (currentCategory.equals("Sports")) {
+            String question = this.sportsQuestions.removeFirst();
             System.out.println(question);
             return question;
         }
-        if (currentCategory == "Rock") {
-            Object question = this.rockQuestions.removeFirst();
+        if (currentCategory.equals("Rock")) {
+            String question = this.rockQuestions.removeFirst();
             System.out.println(question);
             return question;
         }

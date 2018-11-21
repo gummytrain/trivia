@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.nullValue;
 
 class QuestionDeckTest {
 
@@ -35,25 +36,37 @@ class QuestionDeckTest {
         assertThat(actualCategory, is("Rock"));
     }
 
-    @Test
-    void askingFirstPopQuestion() {
+    @ParameterizedTest
+    @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
+    void askingFirstQuestion(String category) {
+
         QuestionDeck questionDeck = new QuestionDeck();
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"Pop", "Science", "Sports", "Rock"})
+    void askMultipleQuestion(String category) {
+        QuestionDeck questionDeck = new QuestionDeck();
+
+        questionDeck.fillQuestions();
+
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 0"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 1"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 2"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 3"));
+        assertThat(questionDeck.askQuestionFor(category), is(category + " Question 4"));
     }
 
     @Test
-    void askMultiplePopQuestion() {
+    void askingForUnknownCategory() {
         QuestionDeck questionDeck = new QuestionDeck();
 
         questionDeck.fillQuestions();
 
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 0"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 1"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 2"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 3"));
-        assertThat(questionDeck.askQuestionFor("Pop"), is("Pop Question 4"));
+        assertThat(questionDeck.askQuestionFor("unknown"), is(nullValue()));
     }
 }
