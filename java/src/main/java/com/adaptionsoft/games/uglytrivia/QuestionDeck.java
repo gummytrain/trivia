@@ -1,7 +1,8 @@
 package com.adaptionsoft.games.uglytrivia;
 
-import java.util.LinkedList;
+import java.util.List;
 
+import static java.lang.String.*;
 import static java.util.Arrays.asList;
 
 public class QuestionDeck {
@@ -9,33 +10,26 @@ public class QuestionDeck {
     Category science = new Category("Science", asList(1, 5, 9));
     Category sports = new Category("Sports", asList(2, 6, 10));
     Category rock = new Category("Rock", asList(3, 7, 11));
+    private final List<Category> categories;
 
-    public String createQuestion(int index, final String category) {
-        return category + " Question " + index;
+    public QuestionDeck() {
+        categories = asList(pop, science, sports, rock);
     }
 
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.pop.addQuestion(createQuestion(i, pop.name()));
-            this.science.addQuestion(createQuestion(i, science.name()));
-            this.sports.addQuestion(createQuestion(i, sports.name()));
-            this.rock.addQuestion(createQuestion(i, rock.name()));
+            for (Category category : categories) {
+                category.addQuestion(format("%s Question %d", category.name(), i));
+            }
         }
     }
 
     String nextQuestionFor(String currentCategory) {
         String question = null;
-        if (pop.isNamed(currentCategory)) {
-            question = pop.nextQuestion();
-        }
-        if (science.isNamed(currentCategory)) {
-            question = science.nextQuestion();
-        }
-        if (sports.isNamed(currentCategory)) {
-            question = sports.nextQuestion();
-        }
-        if (rock.isNamed(currentCategory)) {
-            question = rock.nextQuestion();
+
+        for (Category category : categories) {
+            if (category.isNamed(currentCategory))
+                question = category.nextQuestion();
         }
         if (question == null) {
             throw new QuestionForUnknownCategory();
@@ -44,10 +38,10 @@ public class QuestionDeck {
     }
 
     String currentCategoryFor(int playerPosition) {
-        if (pop.isPlacedOn(playerPosition)) return pop.name();
-        if (science.isPlacedOn(playerPosition)) return science.name();
-        if (sports.isPlacedOn(playerPosition)) return sports.name();
-        if (rock.isPlacedOn(playerPosition)) return rock.name();
+        for (Category category : categories) {
+            if (category.isPlacedOn(playerPosition))
+                return category.name();
+        }
         throw new OutOfTheBoardException();
     }
 }
