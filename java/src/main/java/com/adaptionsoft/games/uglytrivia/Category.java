@@ -1,15 +1,18 @@
 package com.adaptionsoft.games.uglytrivia;
 
+import java.util.LinkedList;
 import java.util.List;
 
-public class CategoryQuestions {
+public class Category {
     private String name;
     private List<Integer> positions;
+    private LinkedList<String> questions;
 
-    public CategoryQuestions(String name, List<Integer> positions) {
+    public Category(String name, List<Integer> positions) {
 
         this.name = name;
         this.positions = positions;
+        this.questions = new LinkedList<>();
     }
 
     public boolean isNamed(String categoryName) {
@@ -17,7 +20,11 @@ public class CategoryQuestions {
     }
 
     public String nextQuestion() {
-        return null;
+        if (questions.isEmpty()) {
+            throw new NoMoreQuestion();
+        }
+
+        return questions.removeFirst();
     }
 
     public boolean isPlacedOn(int position) {
@@ -29,6 +36,6 @@ public class CategoryQuestions {
     }
 
     public void addQuestion(String question) {
-
+        questions.add(question);
     }
 }
