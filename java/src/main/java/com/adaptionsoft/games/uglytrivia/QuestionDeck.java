@@ -1,23 +1,30 @@
 package com.adaptionsoft.games.uglytrivia;
 
 import java.util.LinkedList;
+import java.util.List;
+
+import static java.util.Arrays.asList;
 
 public class QuestionDeck {
     LinkedList<String> popQuestions = new LinkedList();
+    List<Integer> popPlaces = asList(0, 4, 8);
     LinkedList<String> scienceQuestions = new LinkedList();
+    List<Integer> sciencePlaces = asList(1, 5, 9);
     LinkedList<String> sportsQuestions = new LinkedList();
+    List<Integer> sportsPlaces = asList(2, 6, 10);
     LinkedList<String> rockQuestions = new LinkedList();
+    List<Integer> rockPlaces = asList(3, 7, 11);
 
-    public String createRockQuestion(int index){
-        return "Rock Question " + index;
+    public String createQuestion(int index, final String category) {
+        return category + " Question " + index;
     }
 
     public void fillQuestions() {
         for (int i = 0; i < 50; i++) {
-            this.popQuestions.addLast("Pop Question " + i);
-            this.scienceQuestions.addLast(("Science Question " + i));
-            this.sportsQuestions.addLast(("Sports Question " + i));
-            this.rockQuestions.addLast(createRockQuestion(i));
+            this.popQuestions.addLast(createQuestion(i, "Pop"));
+            this.scienceQuestions.addLast(createQuestion(i, "Science"));
+            this.sportsQuestions.addLast(createQuestion(i, "Sports"));
+            this.rockQuestions.addLast(createQuestion(i, "Rock"));
         }
     }
 
@@ -46,15 +53,10 @@ public class QuestionDeck {
     }
 
     String currentCategoryFor(int playerPosition) {
-        if (playerPosition == 0) return "Pop";
-        if (playerPosition == 4) return "Pop";
-        if (playerPosition == 8) return "Pop";
-        if (playerPosition == 1) return "Science";
-        if (playerPosition == 5) return "Science";
-        if (playerPosition == 9) return "Science";
-        if (playerPosition == 2) return "Sports";
-        if (playerPosition == 6) return "Sports";
-        if (playerPosition == 10) return "Sports";
+        if (popPlaces.contains(playerPosition)) return "Pop";
+        if (sciencePlaces.contains(playerPosition)) return "Science";
+        if (sportsPlaces.contains(playerPosition)) return "Sports";
+        if (rockPlaces.contains(playerPosition)) return "Rock";
         return "Rock";
     }
 }
