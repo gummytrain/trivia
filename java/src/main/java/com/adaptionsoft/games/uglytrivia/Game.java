@@ -9,7 +9,6 @@ public class Game {
     int[] purses  = new int[6];
 
 	int currentPlayer = 0;
-    boolean isGettingOutOfPenaltyBox;
     private final QuestionDeck questionDeck;
 
 	public Game(QuestionDeck aQuestionDeck){
@@ -43,9 +42,9 @@ public class Game {
 		
 		if (penaltyBox.isInPenaltyBox(this.currentPlayer)) {
 			if (roll % 2 != 0) {
-				isGettingOutOfPenaltyBox = true;
-				
+				penaltyBox.currentPlayerIsGettingOut(this);
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
+				
 				places[currentPlayer] = places[currentPlayer] + roll;
 				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
 				
@@ -56,8 +55,8 @@ public class Game {
 				askQuestion();
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-				isGettingOutOfPenaltyBox = false;
-				}
+				penaltyBox.currentPlayerIsStaying(this);
+			}
 			
 		} else {
 		
@@ -84,7 +83,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
 		if (penaltyBox.isInPenaltyBox(this.currentPlayer)){
-			if (isGettingOutOfPenaltyBox) {
+			if (penaltyBox.isCurrentPlayerGettingOut(this)) {
 				System.out.println("Answer was correct!!!!");
 				purses[currentPlayer]++;
 				System.out.println(players.get(currentPlayer) 
@@ -121,7 +120,7 @@ public class Game {
 			return winner;
 		}
 	}
-	
+
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
