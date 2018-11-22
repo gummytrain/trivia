@@ -17,15 +17,15 @@ public class PenaltyBox {
         this.inPenaltyBox[currentPlayer] = true;
     }
 
-    public void currentPlayerIsGettingOut(Game game) {
+    public void currentPlayerIsGettingOut() {
         this.isGettingOutOfPenaltyBox = true;
     }
 
-    public void currentPlayerIsStaying(Game game) {
+    public void currentPlayerIsStaying() {
         this.isGettingOutOfPenaltyBox = false;
     }
 
-    public boolean isCurrentPlayerGettingOut(Game game) {
+    public boolean isCurrentPlayerGettingOut() {
         return this.isGettingOutOfPenaltyBox;
     }
 }

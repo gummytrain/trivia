@@ -42,34 +42,30 @@ public class Game {
 		
 		if (penaltyBox.isInPenaltyBox(this.currentPlayer)) {
 			if (roll % 2 != 0) {
-				penaltyBox.currentPlayerIsGettingOut(this);
+				penaltyBox.currentPlayerIsGettingOut();
 				System.out.println(players.get(currentPlayer) + " is getting out of the penalty box");
-				
-				places[currentPlayer] = places[currentPlayer] + roll;
-				if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-				
-				System.out.println(players.get(currentPlayer) 
-						+ "'s new location is " 
-						+ places[currentPlayer]);
-				System.out.println("The category is " + currentCategory());
-				askQuestion();
+
 			} else {
 				System.out.println(players.get(currentPlayer) + " is not getting out of the penalty box");
-				penaltyBox.currentPlayerIsStaying(this);
+				penaltyBox.currentPlayerIsStaying();
+
+				return;
 			}
-			
-		} else {
-		
-			places[currentPlayer] = places[currentPlayer] + roll;
-			if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
-			
-			System.out.println(players.get(currentPlayer) 
-					+ "'s new location is " 
-					+ places[currentPlayer]);
-			System.out.println("The category is " + currentCategory());
-			askQuestion();
 		}
-		
+
+		movePlayerAccordingTo(roll);
+
+	}
+
+	private void movePlayerAccordingTo(int roll) {
+		places[currentPlayer] = places[currentPlayer] + roll;
+		if (places[currentPlayer] > 11) places[currentPlayer] = places[currentPlayer] - 12;
+
+		System.out.println(players.get(currentPlayer)
+				+ "'s new location is "
+				+ places[currentPlayer]);
+		System.out.println("The category is " + currentCategory());
+		askQuestion();
 	}
 
 	private void askQuestion() {
@@ -83,7 +79,7 @@ public class Game {
 
     public boolean wasCorrectlyAnswered() {
 		if (penaltyBox.isInPenaltyBox(this.currentPlayer)){
-			if (penaltyBox.isCurrentPlayerGettingOut(this)) {
+			if (penaltyBox.isCurrentPlayerGettingOut()) {
 				System.out.println("Answer was correct!!!!");
 				purses[currentPlayer]++;
 				System.out.println(players.get(currentPlayer) 
