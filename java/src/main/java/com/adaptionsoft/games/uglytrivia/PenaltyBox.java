@@ -29,7 +29,7 @@ public class PenaltyBox {
         return this.isGettingOutOfPenaltyBox;
     }
 
-    public boolean isGettingOutWith(int roll) {
+    public boolean isNotGettingOutWith(int roll) {
         return roll % 2 == 0;
     }
 }
