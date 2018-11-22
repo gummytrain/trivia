@@ -28,4 +28,8 @@ public class PenaltyBox {
     public boolean isCurrentPlayerGettingOut() {
         return this.isGettingOutOfPenaltyBox;
     }
+
+    public boolean isGettingOutWith(int roll) {
+        return roll % 2 == 0;
+    }
 }
