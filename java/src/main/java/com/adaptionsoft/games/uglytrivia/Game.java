@@ -3,17 +3,17 @@ package com.adaptionsoft.games.uglytrivia;
 import java.util.ArrayList;
 
 public class Game {
-    ArrayList players = new ArrayList();
+	private final PenaltyBox penaltyBox = new PenaltyBox();
+	ArrayList players = new ArrayList();
     int[] places = new int[6];
     int[] purses  = new int[6];
-    boolean[] inPenaltyBox  = new boolean[6];
 
-    int currentPlayer = 0;
+	int currentPlayer = 0;
     boolean isGettingOutOfPenaltyBox;
     private final QuestionDeck questionDeck;
 
-    public Game(QuestionDeck aQuestionDeck){
-        questionDeck = aQuestionDeck;
+	public Game(QuestionDeck aQuestionDeck){
+		questionDeck = aQuestionDeck;
     }
 
     public boolean isPlayable() {
@@ -26,13 +26,13 @@ public class Game {
 	    players.add(playerName);
 	    places[howManyPlayers()] = 0;
 	    purses[howManyPlayers()] = 0;
-	    inPenaltyBox[howManyPlayers()] = false;
-	    
-	    System.out.println(playerName + " was added");
+		penaltyBox.prepareEmptyPenaltyBox(this.howManyPlayers());
+
+		System.out.println(playerName + " was added");
 	    System.out.println("They are player number " + players.size());
 		return true;
 	}
-	
+
 	public int howManyPlayers() {
 		return players.size();
 	}
@@ -41,7 +41,7 @@ public class Game {
 		System.out.println(players.get(currentPlayer) + " is the current player");
 		System.out.println("They have rolled a " + roll);
 		
-		if (inPenaltyBox[currentPlayer]) {
+		if (penaltyBox.isInPenaltyBox(this.currentPlayer)) {
 			if (roll % 2 != 0) {
 				isGettingOutOfPenaltyBox = true;
 				
@@ -83,7 +83,7 @@ public class Game {
     }
 
     public boolean wasCorrectlyAnswered() {
-		if (inPenaltyBox[currentPlayer]){
+		if (penaltyBox.isInPenaltyBox(this.currentPlayer)){
 			if (isGettingOutOfPenaltyBox) {
 				System.out.println("Answer was correct!!!!");
 				purses[currentPlayer]++;
@@ -125,8 +125,8 @@ public class Game {
 	public boolean wrongAnswer(){
 		System.out.println("Question was incorrectly answered");
 		System.out.println(players.get(currentPlayer)+ " was sent to the penalty box");
-		inPenaltyBox[currentPlayer] = true;
-		
+		penaltyBox.sendToPenaltyBox(this.currentPlayer);
+
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
 		return true;
